@@ -1,0 +1,17 @@
+services:
+  viewer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "educative-viewer"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../educative.io_scraper/scraped_data:/course_data
+    environment:
+      - FLASK_APP=educative-viewer
+      - course_dir=/course_data
+      - authtoken=keystring
+      - downloadtoken=keystring
+    user: "0:0"
+    privileged: true
