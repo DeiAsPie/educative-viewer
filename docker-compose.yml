@@ -14,4 +14,4 @@ services:
       - course_dir=/course_data
       - authtoken=keystring
       - downloadtoken=keystring
-    command: sh -c "mkdir -p /root/EducativeViewer && gunicorn --workers=2 -b 0.0.0.0:5000 'educative-viewer:create_app()' --timeout 120"
+    command: sh -c "mkdir -p /root/EducativeViewer && gunicorn --workers=2 -b 0.0.0.0:5000 'educative-viewer:create_app()'"
