@@ -8,7 +8,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /home/azureuser/scraped_data:/course_data
+      - /home/user/Downloads/personal/educative/courses:/course_data
     environment:
       - FLASK_APP=educative-viewer
       - course_dir=/course_data
