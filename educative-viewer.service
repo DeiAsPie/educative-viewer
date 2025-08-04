@@ -1,0 +1,17 @@
+[Unit]
+Description=Educative Viewer Podman Compose Application
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=%h/Downloads/personal/educative/educative-viewer
+ExecStart=/usr/bin/podman-compose up -d
+ExecStop=/usr/bin/podman-compose down
+ExecReload=/usr/bin/podman-compose restart
+TimeoutStartSec=0
+Environment="PODMAN_USERNS=keep-id"
+
+[Install]
+WantedBy=default.target
