@@ -6,14 +6,15 @@ import natsort
 import os
 import shutil
 
-from .db_utility import commit_current_user_details, get_current_path_details, get_current_course_details, commit_current_course_details, \
+from db_utility import commit_current_user_details, get_current_path_details, get_current_course_details, commit_current_course_details, \
     commit_current_path_details, get_current_user_details
-from .os_utility import check_code_present, create_dir, delete_dir, load_topics, load_toc_if_exist, build_toc_render_items, \
+from os_utility import check_code_present, create_dir, delete_dir, load_topics, load_toc_if_exist, build_toc_render_items, \
     load_folder, build_folder_structure_for_monaco_sidebar
 
 main = Blueprint('main', __name__)
 root_course_dir = os.getenv('course_dir', '.')
-OS_ROOT = os.path.join(os.path.expanduser('~'), 'EducativeViewer')
+# Use environment variable or fall back to home directory
+OS_ROOT = os.environ.get('EDUCATIVE_VIEWER_ROOT', os.path.join(os.path.expanduser('~'), 'EducativeViewer'))
 
 
 @main.route('/')

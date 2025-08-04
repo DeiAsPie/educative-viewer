@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from sqlalchemy import PrimaryKeyConstraint
-from . import db
+from __init__ import db
 
 
 class User(UserMixin, db.Model):

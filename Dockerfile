@@ -11,7 +11,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY . ./educative-viewer
+COPY . .
+
+# Create data directory for application data
+RUN mkdir -p /app/data
 
 # Expose the port the app runs on
 EXPOSE 5000
+
+# Add the command to run the application
+CMD ["python", "-c", "from __init__ import create_app; app = create_app(); app.run(host='0.0.0.0', port=5000)"]

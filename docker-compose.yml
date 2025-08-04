@@ -8,10 +8,11 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /home/user/Downloads/personal/educative/courses:/course_data
+      - /home/user/Downloads/personal/educative/courses:/course_data:ro,Z
     environment:
-      - FLASK_APP=educative-viewer
+      - FLASK_APP=__init__.py
       - course_dir=/course_data
       - authtoken=keystring
       - downloadtoken=keystring
-    command: sh -c "mkdir -p /root/EducativeViewer && gunicorn --workers=2 -b 0.0.0.0:5000 'educative-viewer:create_app()'"
+      - EDUCATIVE_VIEWER_ROOT=/app/data
+    command: python -c "from __init__ import create_app; app = create_app(); app.run(host='0.0.0.0', port=5000)"

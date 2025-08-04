@@ -1,5 +1,5 @@
-from .models import CurrentPath, CourseDetails, User
-from . import db
+from models import CurrentPath, CourseDetails, User
+from __init__ import db
 
 
 def get_current_path_details(username):
