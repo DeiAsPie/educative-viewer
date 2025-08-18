@@ -82,3 +82,28 @@
 #### > (For MacOS/Linux)
 
       pyinstaller --clean --add-data templates:templates --add-data static:static --onefile -i"icon.ico" educative-viewer.py
+
+## Docker / Podman persistence
+
+When running with Docker or Podman, the application stores its sqlite database at the path defined by the `EDUCATIVE_VIEWER_ROOT` environment variable (default: `~/EducativeViewer`). To make user accounts and progress persist across container restarts, bind-mount a host directory into the container and set `EDUCATIVE_VIEWER_ROOT` to that path.
+
+Example `docker-compose.yml` snippet (this project already includes it):
+
+```yaml
+volumes:
+  - ./data:/app/data:Z
+environment:
+  - EDUCATIVE_VIEWER_ROOT=/app/data
+```
+
+If you have an existing database at `~/EducativeViewer/db.sqlite` you can migrate it into the compose-managed data directory:
+
+1. Stop the container.
+2. Copy existing DB to the project data folder:
+
+```bash
+mkdir -p ./data
+cp ~/EducativeViewer/db.sqlite ./data/
+```
+
+3. Start the container again. The app will read from `./data/db.sqlite` and existing users will be preserved.

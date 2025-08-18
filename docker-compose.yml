@@ -9,10 +9,12 @@ services:
       - "5000:5000"
     volumes:
       - /home/user/Downloads/personal/educative/courses:/course_data:ro,Z
+      - ./data:/app/data:Z
     environment:
       - FLASK_APP=__init__.py
       - course_dir=/course_data
       - authtoken=keystring
       - downloadtoken=keystring
       - EDUCATIVE_VIEWER_ROOT=/app/data
-    command: python -c "from __init__ import create_app; app = create_app(); app.run(host='0.0.0.0', port=5000)"
+    command: >-
+      python -c "from __init__ import create_app; app = create_app(); app.run(host='0.0.0.0', port=5000)"
